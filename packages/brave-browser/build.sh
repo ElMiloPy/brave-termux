@@ -38,6 +38,9 @@ termux_step_post_get_source() {
 	mkdir -p "$TERMUX_PKG_SRCDIR/brave"
 	tar -xzf "${_brave_tarball}" --strip-components=1 -C "$TERMUX_PKG_SRCDIR/brave"
 
+	# Apply brave-core patches
+	python3 "$TERMUX_PKG_BUILDER_DIR/scripts/apply_brave_patches.py" "$TERMUX_PKG_SRCDIR"
+
 	# Apply patches related to chromium
 	local f
 	for f in $(find "$TERMUX_PKG_BUILDER_DIR/../brave-host-tools/cr-patches" -maxdepth 1 -type f -name *.patch | sort); do
@@ -373,7 +376,8 @@ termux_step_make() {
 						third_party/pdfium:pdfium_public_headers
 
 	# Build other components
-	ninja -C out/Release brave chromedriver chrome_crashpad_handler headless_shell
+	ninja -C out/Release chrome chromedriver chrome_crashpad_handler headless_shell
+	cp -f out/Release/chrome out/Release/brave
 }
 
 termux_step_make_install() {
