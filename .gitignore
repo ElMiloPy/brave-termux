@@ -1,0 +1,44 @@
+# Build output and packages
+*.deb
+*.ddeb
+*.tar.*
+*.tar
+*.zip
+*.log
+debs/
+output/
+dist/
+
+# Termux build system directories
+sources/
+build-tools/
+cache/
+sysroot-*/
+depot_tools/
+custom-toolchain/
+host-pkg-config-bin/
+packages/*/cache/
+packages/*/src/
+packages/*/build/
+
+# Compilation artifacts & build output trees
+out/
+build/
+*.o
+*.a
+*.so
+*.ninja
+.ninja_*
+ninja_log
+args.gn
+
+# Temporary and editor files
+.cache/
+*.tmp
+*~
+*.swp
+*.swo
+Session.vim
+.DS_Store
+.idea/
+.vscode/
