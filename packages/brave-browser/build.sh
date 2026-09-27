@@ -37,6 +37,7 @@ termux_step_post_get_source() {
 	rm -rf "$TERMUX_PKG_SRCDIR/brave"
 	mkdir -p "$TERMUX_PKG_SRCDIR/brave"
 	tar -xzf "${_brave_tarball}" --strip-components=1 -C "$TERMUX_PKG_SRCDIR/brave"
+	touch "$TERMUX_PKG_SRCDIR/brave/.env"
 
 	# Apply brave-core patches
 	python3 "$TERMUX_PKG_BUILDER_DIR/scripts/apply_brave_patches.py" "$TERMUX_PKG_SRCDIR"
@@ -81,6 +82,10 @@ termux_step_pre_configure() {
 termux_step_configure() {
 	cd $TERMUX_PKG_SRCDIR
 	termux_setup_ninja
+
+	# Ensure brave/.env exists
+	mkdir -p "$TERMUX_PKG_SRCDIR/brave"
+	touch "$TERMUX_PKG_SRCDIR/brave/.env"
 
 	# Fetch depot_tools
 	export DEPOT_TOOLS_UPDATE=0
