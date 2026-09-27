@@ -237,10 +237,20 @@ print(deps['src/third_party/node/node_modules']['objects'][0]['sha256sum'])
 	touch $_common_args_file
 
 	echo "
-# Do official build to decrease file size
-is_official_build = true
+# Non-official release build without proprietary keys
+is_official_build = false
 is_debug = false
 symbol_level = 0
+bitflyer_production_fee_address = \"dummy\"
+bitflyer_production_url = \"https://no-thanks.invalid\"
+uphold_production_api_url = \"https://no-thanks.invalid\"
+uphold_production_fee_address = \"dummy\"
+uphold_production_oauth_url = \"https://no-thanks.invalid\"
+zebpay_production_api_url = \"https://no-thanks.invalid\"
+zebpay_production_oauth_url = \"https://no-thanks.invalid\"
+rewards_grant_dev_endpoint = \"https://no-thanks.invalid\"
+rewards_grant_staging_endpoint = \"https://no-thanks.invalid\"
+rewards_grant_prod_endpoint = \"https://no-thanks.invalid\"
 # Use our custom toolchain
 clang_version = \"$_host_clang_version\"
 use_sysroot = false
