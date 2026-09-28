@@ -39,6 +39,16 @@ termux_step_post_get_source() {
 	tar -xzf "${_brave_tarball}" --strip-components=1 -C "$TERMUX_PKG_SRCDIR/brave"
 	touch "$TERMUX_PKG_SRCDIR/brave/.env"
 
+	# Clone minimal submodules required by brave_sync and build
+	if [ ! -d "$TERMUX_PKG_SRCDIR/brave/third_party/bip39wally-core-native" ]; then
+		git clone --depth 1 https://github.com/brave-intl/bat-native-bip39wally-core.git \
+			"$TERMUX_PKG_SRCDIR/brave/third_party/bip39wally-core-native"
+	fi
+	if [ ! -d "$TERMUX_PKG_SRCDIR/brave/vendor/bat-native-tweetnacl" ]; then
+		git clone --depth 1 https://github.com/brave-intl/bat-native-tweetnacl.git \
+			"$TERMUX_PKG_SRCDIR/brave/vendor/bat-native-tweetnacl"
+	fi
+
 	# Apply brave-core patches
 	python3 "$TERMUX_PKG_BUILDER_DIR/scripts/apply_brave_patches.py" "$TERMUX_PKG_SRCDIR"
 
@@ -256,6 +266,8 @@ zebpay_production_oauth_url = \"https://no-thanks.invalid\"
 rewards_grant_dev_endpoint = \"https://no-thanks.invalid\"
 rewards_grant_staging_endpoint = \"https://no-thanks.invalid\"
 rewards_grant_prod_endpoint = \"https://no-thanks.invalid\"
+enable_brave_wallet = false
+translate_genders = false
 # Use our custom toolchain
 clang_version = \"$_host_clang_version\"
 use_sysroot = false
