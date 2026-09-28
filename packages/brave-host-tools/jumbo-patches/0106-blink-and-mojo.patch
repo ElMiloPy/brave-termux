@@ -2705,12 +2705,10 @@ diff --git a/third_party/blink/renderer/modules/permissions/BUILD.gn b/third_par
 index 2e4b14e097..ab20f6efde 100644
 --- a/third_party/blink/renderer/modules/permissions/BUILD.gn
 +++ b/third_party/blink/renderer/modules/permissions/BUILD.gn
-@@ -15,4 +15,5 @@ blink_modules_sources("permissions") {
-     "permissions.cc",
-     "permissions.h",
-   ]
+@@ -6,6 +6,7 @@
+ blink_modules_sources("permissions") {
 +  jumbo_excluded_sources = [ "permission_utils.cc" ]
- }
+   sources = [
 diff --git a/third_party/blink/renderer/modules/shared_storage/shared_storage_worklet.cc b/third_party/blink/renderer/modules/shared_storage/shared_storage_worklet.cc
 index aeb8343ed4..5ac248c26c 100644
 --- a/third_party/blink/renderer/modules/shared_storage/shared_storage_worklet.cc
