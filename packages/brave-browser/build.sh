@@ -401,6 +401,24 @@ if target in c:
 			sed -i '/configs += \[ ":blink_common_implementation" \]/a \  jumbo_excluded_sources = [\n    "$root_gen_dir/third_party/blink/common/features_generated.cc",\n    "$root_gen_dir/third_party/blink/common/origin_trials/origin_trials.cc",\n  ]' "$TERMUX_PKG_SRCDIR/third_party/blink/common/BUILD.gn"
 	fi
 
+	# Register Widevine localstate prefs under #else when ENABLE_WIDEVINE=false
+	if [ -f "$TERMUX_PKG_SRCDIR/brave/browser/brave_local_state_prefs.cc" ]; then
+		python3 -c '
+path = "'"$TERMUX_PKG_SRCDIR"'/brave/browser/brave_local_state_prefs.cc"
+with open(path, "r") as f: c = f.read()
+target = """#if BUILDFLAG(ENABLE_WIDEVINE)
+  RegisterWidevineLocalstatePrefs(registry);
+#endif"""
+replacement = """#if BUILDFLAG(ENABLE_WIDEVINE)
+  RegisterWidevineLocalstatePrefs(registry);
+#else
+  registry->RegisterBooleanPref(kWidevineEnabled, false);
+#endif"""
+if target in c:
+    with open(path, "w") as f: f.write(c.replace(target, replacement, 1))
+'
+	fi
+
 	# Fix feature_compiler.py path resolution when build dir is outside src
 	if [ -f "$TERMUX_PKG_SRCDIR/brave/chromium_src/tools/json_schema_compiler/feature_compiler.py" ]; then
 		python3 -c '
