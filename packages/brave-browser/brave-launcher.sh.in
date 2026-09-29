@@ -38,4 +38,4 @@ fi
 # Set the .desktop file name
 export CHROME_DESKTOP="brave-browser.desktop"
 
-exec "$PROGDIR/brave" --extra-plugin-dir=@TERMUX_PREFIX@/lib/nsbrowser/plugins --no-sandbox ${BRAVE_FLAGS} "$@"
+exec "$PROGDIR/brave" --extra-plugin-dir=@TERMUX_PREFIX@/lib/nsbrowser/plugins --no-sandbox --disable-gpu-vsync ${BRAVE_FLAGS} "$@"

@@ -250,6 +250,7 @@ print(deps['src/third_party/node/node_modules']['objects'][0]['sha256sum'])
 is_official_build = true
 is_debug = false
 symbol_level = 0
+v8_wasm_random_fuzzers = false
 # Use our custom toolchain
 clang_version = \"$_host_clang_version\"
 use_sysroot = false

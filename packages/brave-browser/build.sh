@@ -662,6 +662,7 @@ rewards_grant_staging_endpoint = \"https://no-thanks.invalid\"
 rewards_grant_prod_endpoint = \"https://no-thanks.invalid\"
 enable_brave_wallet = false
 translate_genders = false
+v8_wasm_random_fuzzers = false
 # Use our custom toolchain
 clang_version = \"$_host_clang_version\"
 use_sysroot = false
