@@ -382,12 +382,16 @@ index 256e5433c3..8e48eb96b7 100644
  import("//build/config/rust.gni")
  import("//build/nocompile.gni")
  import("//testing/libfuzzer/fuzzer_test.gni")
-@@ -112,7 +113,7 @@ config("blink_common_implementation") {
+@@ -112,7 +113,12 @@ config("blink_common_implementation") {
    defines = [ "BLINK_COMMON_IMPLEMENTATION=1" ]
  }
  
 -source_set("common") {
 +jumbo_source_set("common") {
++  jumbo_excluded_sources = [
++    "$root_gen_dir/third_party/blink/common/features_generated.cc",
++    "$root_gen_dir/third_party/blink/common/origin_trials/origin_trials.cc",
++  ]
    # No target should directly depend on this target since this is just the
    # source set rather than the actual component that can be linked to.
    # Dependencies instead should be to //third_party/blink/public/common:common.
@@ -458,8 +462,14 @@ diff --git a/third_party/blink/renderer/bindings/modules/v8/BUILD.gn b/third_par
 index 68250fe525..caae1cf983 100644
 --- a/third_party/blink/renderer/bindings/modules/v8/BUILD.gn
 +++ b/third_party/blink/renderer/bindings/modules/v8/BUILD.gn
-@@ -31,7 +31,7 @@ blink_modules_sources("v8") {
+@@ -31,7 +31,13 @@ blink_modules_sources("v8") {
    ]
++
++  jumbo_excluded_sources = [
++    "$root_gen_dir/third_party/blink/renderer/bindings/modules/v8/v8_navigator.cc",
++    "$root_gen_dir/third_party/blink/renderer/bindings/modules/v8/v8_storage_estimate.cc",
++    "$root_gen_dir/third_party/blink/renderer/bindings/modules/v8/v8_worker_navigator.cc",
++  ]
  }
  
 -source_set("testing") {

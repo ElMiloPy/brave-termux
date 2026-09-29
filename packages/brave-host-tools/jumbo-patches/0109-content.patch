@@ -303,6 +303,8 @@ index 548abd4a68..1b7675f724 100644
 +  jumbo_excluded_sources = [
 +    # It requires CloneTraits<std::vector<bool>>
 +    "webid/document_metadata.cc",
++    # Brave macro override leaks into TextInputClient in jumbo
++    "web_contents/web_contents_impl.cc",
 +  ]
  
    if (is_android) {

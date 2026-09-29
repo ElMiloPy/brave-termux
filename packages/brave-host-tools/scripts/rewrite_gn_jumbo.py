@@ -53,6 +53,10 @@ IGNORE_LIST_TEXT = """
 //components/ui_devtools/views
 //components/safe_browsing/content/renderer/phishing_classifier
 //components/spellcheck/renderer
+//components/sync/engine
+//components/sync/service
+//components/browser_sync
+//components/send_tab_to_self
 //chrome/browser/ui/color
 //chrome/browser/glic:glic
 //chrome/browser/ui/views/tabs/projects
